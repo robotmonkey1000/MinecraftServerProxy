@@ -94,16 +94,16 @@ Make sure when you enter the IP in the multiplayer area that it is the one set f
 |08            |0003       |05              |6161616161      |
 
 ### Position:
-|Packet Length | Packet ID | X              | Y              | Z              | On Ground |
+|Packet Length | Packet ID | X (Double)     | Y (Double)     | Z (Double)     | On Ground |
 |--------------|-----------|----------------|----------------|----------------|-----------|
 |1b            |0011       |4065478211b66e84|4015024197a953aa|c062171258865939|00         |
 
 ### Movement:
-|Packet Length | Packet ID | X              | Y              | Z              | Look_X | Look_Y | On Ground |
-|--------------|-----------|----------------|----------------|----------------|--------|--------|-----------|
-|23            |0012       |4065478211b66e84|4015024197a953aa|c062171258865939|c0621712|58865939|00         |
+|Packet Length | Packet ID | X (Double)     | Y (Double)     | Z (Double)     | Look_X (Float) | Look_Y (Float) | On Ground |
+|--------------|-----------|----------------|----------------|----------------|----------------|----------------|-----------|
+|23            |0012       |4065478211b66e84|4015024197a953aa|c062171258865939|c0621712        |58865939        |00         |
 
 ### Looking:
-|Packet Length | Packet ID | Look_X | Look_Y | On Ground |
-|--------------|-----------|--------|--------|-----------|
-|0b            |0013       |43f0d30b|425b999e| 01        |
+|Packet Length | Packet ID | Look_X (Float) | Look_Y (Float) | On Ground |
+|--------------|-----------|----------------|----------------|-----------|
+|0b            |0013       |43f0d30b        |425b999e        | 01        |
