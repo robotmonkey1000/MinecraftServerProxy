@@ -87,6 +87,7 @@ Make sure when you enter the IP in the multiplayer area that it is the one set f
 - This is how far I have gotten so far. But this will continue! There is still much for me to learn and play with. Keep checking back and I will update this with my findings for packets and my process. Thanks for stopping by!
 
 ## Findings
+These are all examples of each type of packet. They are not gonna always be exactly what you see here. Lengths and information change.
 
 ### Message:
 |Packet Length | Packet ID | Message Length | Message        |
