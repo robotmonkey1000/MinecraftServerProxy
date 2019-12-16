@@ -261,6 +261,13 @@ bytes   packid   x                y                z                lookx    loo
 23 0012 c039235559ee060b 4010000000000000 c041aeaa27b588ae 444d13d6 42a0801a 01
 23 0012 c0391baad9d68e33 4010000000000000 c041adde38f08538 444d1d70 429f99b3 01
 
+Movment Modifier: 001b
+PLength  PID  ?  Modifier
+05       001b 01 0000       Crouching
+05       001b 01 0100       Not Crouching
+05       001b 05 0300       Sprinting
+05       001b 05 0400       Stopped Sprinting
+
 */
 
 function hex2String(hexx) {
@@ -352,7 +359,27 @@ function parse(data) {
 
       console.log("Message[" + mlength + "]: " + message);
     }
-  }else {
+  }else if(packetId == "001b") {
+    if(1) {
+      if(data[9] == '0') {
+        console.log("Client has started crouching.");
+      }
+      else if(data[9] == '1') {
+        console.log("Client has stopped crouching.");
+      }
+      else if(data[9] == '3') {
+        console.log("Client has started sprinting.");
+      }
+      else if(data[9] == '4') {
+        console.log("Client has stopped sprinting.");
+      }
+      else {
+        console.log("Crouch: Unknown Value. Should Check.");
+      }
+    }
+    console.log("Client: " + data);
+  }
+  else {
     console.log(data.substring(0, 6));
     console.log("Client: " + data);
     console.log('');
