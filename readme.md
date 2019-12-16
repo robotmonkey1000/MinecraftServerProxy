@@ -88,23 +88,42 @@ Make sure when you enter the IP in the multiplayer area that it is the one set f
 
 ## Findings
 These are all examples of each type of packet. They are not gonna always be exactly what you see here. Lengths and information change.
+All packets seem to start with the length of the packet. Then some packet ID. Then the actual data.
+
+### [Client To Server]
 
 ### Message:
+When a client sends a message. The first byte is the length of the packet. The next 2 bytes are the packet id (0003 means sending a message).
+Then the next byte is the length of the message (if the length is greater than one byte can hold, more than 255 characters, it uses the compressed packet system which I have not figured out yet.) Then comes the actual message where each byte is a character.
+
 |Packet Length | Packet ID | Message Length | Message        |
 |--------------|-----------|----------------|----------------|
 |08            |0003       |05              |6161616161      |
 
 ### Position:
+This is sent when you are moving around using WASD. The X Y Z coordinates are sent as doubles until they get to really large numbers. The last byte keeps track of if you are on the ground. 00 if not and 01 if you are.
+
 |Packet Length | Packet ID | X (Double)     | Y (Double)     | Z (Double)     | On Ground |
 |--------------|-----------|----------------|----------------|----------------|-----------|
 |1b            |0011       |4065478211b66e84|4015024197a953aa|c062171258865939|00         |
 
 ### Movement:
+This type of packet is sent when you are moving and looking using the mouse. XYZ are saved as doubles. The X looking direction, and y looking direction are saved as floats. The only thing is that Look X and Look Y are bound in game to -180 --> 180 and -90 --> 90 respectively but for the look X it is sent as a number that always grows in each direction, so I have to figure out the math for how to detect if changing direction from looking left to right. For now I just mod the number by 180 to keep it in the same range, kinda.
+
 |Packet Length | Packet ID | X (Double)     | Y (Double)     | Z (Double)     | Look_X (Float) | Look_Y (Float) | On Ground |
 |--------------|-----------|----------------|----------------|----------------|----------------|----------------|-----------|
 |23            |0012       |4065478211b66e84|4015024197a953aa|c062171258865939|c0621712        |58865939        |00         |
 
 ### Looking:
+This is the packet sent when moving the mouse (looking around). Stores both the lookX and lookY as Floats.
+
 |Packet Length | Packet ID | Look_X (Float) | Look_Y (Float) | On Ground |
 |--------------|-----------|----------------|----------------|-----------|
 |0b            |0013       |43f0d30b        |425b999e        | 01        |
+
+### Movement Modifiers:
+This is a packet sent when there is an effect for movement. The last 2 bytes keep track of the modifier. This keeps track of if you are crouching (0000), stopped crouching (0100), are sprinting (0300), and stopped sprinting(0400). There are other ones but I have not found out how to consistently get them to show up. There is a byte in the middle that changes on occasion and I am not sure what it means yet but when I find out I will update.
+
+|Packet Length | Packet ID | ?  | Modifier |
+|--------------|-----------|----|----------|
+|05            |001b       | 01 | 0000     |
