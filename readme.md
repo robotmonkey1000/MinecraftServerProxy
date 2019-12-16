@@ -122,7 +122,7 @@ This is the packet sent when moving the mouse (looking around). Stores both the 
 |0b            |0013       |43f0d30b        |425b999e        | 01        |
 
 ### Movement Modifiers:
-This is a packet sent when there is an effect for movement. The last 2 bytes keep track of the modifier. This keeps track of if you are crouching (0000), stopped crouching (0100), are sprinting (0300), and stopped sprinting(0400). There are other ones but I have not found out how to consistently get them to show up. There is a byte in the middle that changes on occasion and I am not sure what it means yet but when I find out I will update.
+This is a packet sent when there is an effect for movement. The last 2 bytes keep track of the modifier. This keeps track of if you are crouching (0000), stopped crouching (0100), are sprinting (0300), and stopped sprinting(0400). There are other ones but I have not found out how to consistently get them to show up. There is a byte in the middle that changes on occasion and I am not sure what it means yet but when I find out I will update, I think it is like a player id of some sort. Sometimes if this is activated at the same time as movement it will append the movement packets to it as well.
 
 |Packet Length | Packet ID | ?  | Modifier |
 |--------------|-----------|----|----------|
